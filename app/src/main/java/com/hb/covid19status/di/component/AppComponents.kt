@@ -6,6 +6,7 @@ import com.hb.covid19status.data_source.local.AppDb
 import com.hb.covid19status.di.modules.*
 import com.hb.covid19status.ui.details_stats.DetailsCountriesStatsActivity
 import com.hb.covid19status.ui.list_stats.ListCountriesStatsActivity
+import com.hb.covid19status.ui.onboarding.OnboardingActivity
 import com.hb.covid19status.ui.world_stats.WorldStatsActivity
 import dagger.Component
 import retrofit2.Retrofit
@@ -33,5 +34,6 @@ interface AppComponents {
 
     fun inject(listCountriesStatsActivity: ListCountriesStatsActivity)
     fun inject(detailsCountriesStatsActivity: DetailsCountriesStatsActivity)
-    fun inject(onBoardingActivity: WorldStatsActivity)
+    fun inject(worldStatsActivity: WorldStatsActivity)
+    fun inject(onBoardingActivity: OnboardingActivity)
 }

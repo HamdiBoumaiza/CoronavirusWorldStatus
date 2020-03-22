@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.hb.covid19status.ui.world_stats.WorldStatsActivity"
+            android:name="com.hb.covid19status.ui.onboarding.OnboardingActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +26,7 @@
 
         <activity android:name="com.hb.covid19status.ui.list_stats.ListCountriesStatsActivity" />
         <activity android:name="com.hb.covid19status.ui.details_stats.DetailsCountriesStatsActivity" />
+        <activity android:name="com.hb.covid19status.ui.world_stats.WorldStatsActivity" />
 
     </application>
 
