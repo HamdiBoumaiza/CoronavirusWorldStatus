@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="world"
+            type="com.hb.covid19status.model.WorldStats" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <TextView
+            android:id="@+id/tv_total_cases"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@{String.format(@string/total_cases, world.total_cases)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/total_cases" />
+
+        <TextView
+            android:id="@+id/tv_total_deaths"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/total_deaths, world.total_deaths)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_cases"
+            tools:text="@string/total_deaths" />
+
+        <TextView
+            android:id="@+id/tv_new_cases"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/new_cases, world.new_cases)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_deaths"
+            tools:text="@string/new_cases" />
+
+        <TextView
+            android:id="@+id/tv_new_deaths"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/new_deaths, world.new_deaths)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_cases"
+            tools:text="@string/new_deaths" />
+
+        <TextView
+            android:id="@+id/tv_total_recovered"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_green"
+            android:text="@{String.format(@string/total_recovered, world.total_recovered)}"
+            android:textColor="@color/color_61D292"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_deaths"
+            tools:text="@string/total_recovered" />
+
+
+        <TextView
+            android:id="@+id/tv_more_details"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/background_red_green_gradient"
+            android:text="@string/more_details"
+            android:textColor="@color/color_ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/tv_last_updated"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_recovered" />
+
+
+        <TextView
+            android:id="@+id/tv_last_updated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{String.format(@string/last_updated, world.statistic_taken_at)}"
+            android:textColor="@color/color_F0637B"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            tools:text="@string/last_updated" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

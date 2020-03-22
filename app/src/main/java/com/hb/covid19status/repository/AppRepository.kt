@@ -1,0 +1,18 @@
+package com.hb.covid19status.repository
+
+import com.hb.covid19status.data.ResponseListCountries
+import com.hb.covid19status.data.ResultData
+import com.hb.covid19status.model.CountryStat
+import com.hb.covid19status.model.WorldStats
+
+interface AppRepository {
+
+    suspend fun worldWithStatsApi(): ResultData<WorldStats>
+    suspend fun worldWithStatsDb(): ResultData<WorldStats>
+    suspend fun worldWithStats(): ResultData<WorldStats>
+
+    suspend fun listCountriesWithStatsApi(): ResultData<List<CountryStat>>
+    suspend fun listCountriesWithStatsDb(): ResultData<List<CountryStat>>
+    suspend fun listCountriesWithStats(): ResultData<List<CountryStat>>
+
+}

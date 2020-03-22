@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="country"
+            type="com.hb.covid19status.model.CountryStat" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+
+        <TextView
+            android:id="@+id/tv_country_name"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background_red_green_gradient"
+            android:text="@{country.country_name}"
+            android:textColor="@color/color_ffffff"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_total_cases"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@{String.format(@string/total_cases, country.cases)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_country_name"
+            tools:text="@string/total_cases" />
+
+        <TextView
+            android:id="@+id/tv_total_deaths"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/total_deaths, country.deaths)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_cases"
+            tools:text="@string/total_deaths" />
+
+        <TextView
+            android:id="@+id/tv_new_cases"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/new_cases, country.new_cases)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_deaths"
+            tools:text="@string/new_cases" />
+
+        <TextView
+            android:id="@+id/tv_serious_cases"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/serious_cases, country.serious_critical)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_cases"
+            tools:text="@string/serious_cases" />
+
+        <TextView
+            android:id="@+id/tv_new_deaths"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/new_deaths, country.new_deaths)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_serious_cases"
+            tools:text="@string/new_deaths" />
+
+        <TextView
+            android:id="@+id/tv_active_cases"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/active_cases, country.active_cases)}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_deaths"
+            tools:text="@string/active_cases" />
+
+        <TextView
+            android:id="@+id/tv_total_recovered"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:text="@{String.format(@string/total_recovered, country.total_recovered)}"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_green"
+            android:textColor="@color/color_61D292"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_active_cases"
+            tools:text="@string/total_recovered" />
+
+
+        <TextView
+            android:id="@+id/tv_cases_per_1m"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{String.format(@string/cases_per_1m, country.total_cases_per_1m_population)}"
+            android:textColor="@color/color_F0637B"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            tools:text="@string/cases_per_1m" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

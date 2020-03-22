@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Covid19Status</string>
+
+    <string name="last_updated">Last Updated %s</string>
+    <string name="total_cases">Total Cases %s</string>
+    <string name="total_deaths">Total Deaths %s</string>
+    <string name="new_cases">New Cases %s</string>
+    <string name="new_deaths">New Deaths %s</string>
+    <string name="total_recovered">Total Recovered %s</string>
+    <string name="more_details">More Details</string>
+    <string name="error_message">Sorry , there was an error getting data</string>
+    <string name="no_result">No result</string>
+    <string name="serious_cases">Serious Cases %s</string>
+    <string name="active_cases">Active Cases %s</string>
+    <string name="cases_per_1m">Cases per one million : %s</string>
+
+
+    <string name="action_search">Search</string>
+
+</resources>
