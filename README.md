@@ -9,7 +9,7 @@ In order to run this project , you will need to create an account and get a key 
 Screenshots
 -----------
 ![OnboardingActivity](screenshots/Screenshot_1.png "Onboarding ")
-![WorldStatsActivity](screenshots/Screenshot_1.png "World Data")
+![WorldStatsActivity](screenshots/Screenshot_2.png "World Data")
 ![ListCountriesStatsActivity](screenshots/Screenshot_3.png "List countries with stats")
 ![DetailsCountriesStatsActivity](screenshots/Screenshot_4.png "Details country stats")
 
