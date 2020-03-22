@@ -38,6 +38,7 @@ class OnboardingActivity : AppCompatActivity() {
     private fun initViews() {
         Handler().postDelayed({
             startActivity(Intent(this, WorldStatsActivity::class.java))
+            finish()
         }, 2000)
     }
 }

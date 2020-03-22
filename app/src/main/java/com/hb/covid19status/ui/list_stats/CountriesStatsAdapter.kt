@@ -44,15 +44,16 @@ class CountriesStatsAdapter(
         }
     }
 
+    private var tempListCountries: List<CountryStat> = listStats
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val charString = charSequence.toString()
-                val filteredList = ArrayList<CountryStat>()
                 if (charString.isEmpty()) {
-                    filteredList.addAll(listStats)
+                    listStats = tempListCountries
                 } else {
-                    for (row in listStats) {
+                val filteredList = ArrayList<CountryStat>()
+                    for (row in tempListCountries) {
                         if (row.country_name.toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row)
                         }
