@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hb.covid19status.MainApplication
 import com.hb.covid19status.R
 import com.hb.covid19status.databinding.ActivityListStatsBinding
@@ -21,7 +22,7 @@ import com.hb.covid19status.utils.*
 import javax.inject.Inject
 
 class ListCountriesStatsActivity : AppCompatActivity(),
-    CountriesItemClickListener {
+    CountriesItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var countriesAdapter : CountriesStatsAdapter
     private val appComponents by lazy { MainApplication.appComponents }
@@ -46,13 +47,16 @@ class ListCountriesStatsActivity : AppCompatActivity(),
 
     private fun initViews() {
         getViewModel().getListOfStats()
+        binding.swipeRefresh.setOnRefreshListener(this)
     }
 
     private fun initObservers() {
         getViewModel().resultListStats.observe(this, Observer {
+            binding.swipeRefresh.isRefreshing = false
             initRecycler(it)
         })
         getViewModel().errorMessage.observe(this, Observer {
+            binding.swipeRefresh.isRefreshing = false
             handleEmptyList()
         })
         getViewModel().showLoading.observe(this, Observer { showLoading ->
@@ -121,5 +125,9 @@ class ListCountriesStatsActivity : AppCompatActivity(),
         return if (id == R.id.action_search) {
             true
         } else super.onOptionsItemSelected(item)
+    }
+
+    override fun onRefresh() {
+        getViewModel().getListOfStats()
     }
 }

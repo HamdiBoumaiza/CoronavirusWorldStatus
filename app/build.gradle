@@ -42,6 +42,7 @@ dependencies {
     def junit_version = "4.12"
     def espresso_version = "3.2.0"
     def test_runner_version = "1.2.0"
+    def swipe_refresh_version = "1.0.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -55,6 +56,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$core_version"
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_version"
+
 
     // ui
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
