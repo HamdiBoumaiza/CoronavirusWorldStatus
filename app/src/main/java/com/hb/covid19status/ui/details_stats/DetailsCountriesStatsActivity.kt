@@ -1,6 +1,9 @@
 package com.hb.covid19status.ui.details_stats
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +17,7 @@ import javax.inject.Inject
 
 class DetailsCountriesStatsActivity : AppCompatActivity() {
 
+    private lateinit var countryStat: CountryStat
     private val appComponents by lazy { MainApplication.appComponents }
 
     @Inject
@@ -35,8 +39,53 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
 
     private fun initViews() {
         intent?.let {
-            val countryStat = it.getSerializableExtra(COUNTRY_STATS_EXTRA) as CountryStat
+            countryStat = it.getSerializableExtra(COUNTRY_STATS_EXTRA) as CountryStat
             binding.country = countryStat
+        }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_share, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        return if (id == R.id.action_share) {
+            shareCountryStats()
+            true
+        } else super.onOptionsItemSelected(item)
+    }
+
+    private fun shareCountryStats() {
+        if (::countryStat.isInitialized) {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.type = "text/plain"
+            countryStat.apply {
+                shareIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    String.format(
+                        getString(R.string.share_stats_message),
+                        country_name,
+                        cases,
+                        deaths,
+                        new_cases,
+                        serious_critical,
+                        new_deaths,
+                        active_cases,
+                        total_recovered,
+                        total_cases_per_1m_population
+                    )
+                )
+            }
+            startActivity(
+                Intent.createChooser(
+                    shareIntent,
+                    String.format(getString(R.string.share_stats), countryStat.country_name)
+                )
+            )
         }
     }
 
