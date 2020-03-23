@@ -27,3 +27,9 @@ Screenshots
 * [Dagger2](https://dagger.dev/users-guide) - dependency injector
 * [Timber](https://github.com/JakeWharton/timber) - Logger
 * [Stetho](http://facebook.github.io/stetho/) - debug bridge
+
+
+To be added
+---------------
+* Improve design
+* add unit test
