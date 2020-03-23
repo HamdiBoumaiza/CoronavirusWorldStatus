@@ -1,10 +1,10 @@
 # CoronavirusWorldStatus
-an app to stay up to date with the latest stats of the coronavirus<br/>
+An app to stay up to date with the latest stats of the coronavirus<br/>
 This App is using [Coronavirus monitor API](https://rapidapi.com/astsiatsko/api/coronavirus-monitor) as a remote data source
 
 Getting Started
 ---------------
-In order to run this project , you will need to create an account and get a key from [the rapid api](https://rapidapi.com/)
+In order to run this project , you will need to create an account and get a key from [the rapid api](https://rapidapi.com/) and add it to the gradle.properties file
 
 Screenshots
 -----------
@@ -32,4 +32,4 @@ Screenshots
 To be added
 ---------------
 * Improve design
-* add unit test
+* Add unit tests
