@@ -26,7 +26,7 @@ class RemoteDataSourceImpl(
         withContext(ioDispatcher) {
             val request =
                 api.getWorldStatsAsync(BuildConfig.API_KEY)
-            ResultData.Success(request.await())
+            ResultData.Success(request)
         }
 
 
@@ -34,7 +34,7 @@ class RemoteDataSourceImpl(
         withContext(ioDispatcher) {
             val request =
                 api.getListCountriesStatsAsync(BuildConfig.API_KEY)
-            ResultData.Success(request.await())
+            ResultData.Success(request)
         }
 
 }

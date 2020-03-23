@@ -9,13 +9,13 @@ import retrofit2.http.Header
 interface ApiService {
 
     @GET(GENERAL_WORLD_STATS_URL)
-    fun getWorldStatsAsync(
+    suspend fun getWorldStatsAsync(
         @Header("x-rapidapi-key") amount: String
-    ): Deferred<WorldStats>
+    ): WorldStats
 
     @GET(ALL_COUNTRIES_STATS_URL)
-    fun getListCountriesStatsAsync(
+    suspend fun getListCountriesStatsAsync(
         @Header("x-rapidapi-key") amount: String
-    ): Deferred<ResponseListCountries>
+    ): ResponseListCountries
 
 }

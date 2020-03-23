@@ -5,7 +5,6 @@ import com.hb.covid19status.BuildConfig
 import com.hb.covid19status.api.ApiService
 import com.hb.covid19status.api.BASE_URL
 import com.hb.covid19status.api.IO_TIMEOUT
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -22,12 +21,10 @@ class NetworkModule {
     @Singleton
     fun providesRetrofit(
         gsonConverterFactory: GsonConverterFactory,
-        coroutineCallAdapterFactory: CoroutineCallAdapterFactory,
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(gsonConverterFactory)
-            .addCallAdapterFactory(coroutineCallAdapterFactory)
             .client(okHttpClient)
             .build()
     }
@@ -50,12 +47,6 @@ class NetworkModule {
     @Singleton
     fun providesConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
-    }
-
-    @Provides
-    @Singleton
-    fun providesCoroutineCallAdapterFactory(): CoroutineCallAdapterFactory {
-        return CoroutineCallAdapterFactory()
     }
 
     @Provides
