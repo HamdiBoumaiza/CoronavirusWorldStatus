@@ -49,7 +49,12 @@ class WorldStatsActivity : AppCompatActivity() {
 
     private fun initObservers() {
         getViewModel().resultWorldStats.observe(this, Observer { worldStats ->
-            worldStats?.let { binding.world = it }
+            worldStats?.let {
+                binding.groupVisibility.show()
+                binding.world = it
+            } ?: kotlin.run {
+                handleError()
+            }
         })
 
         getViewModel().errorMessage.observe(this, Observer {

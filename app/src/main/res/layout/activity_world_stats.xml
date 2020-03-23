@@ -126,5 +126,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_visibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_last_updated,tv_more_details,tv_total_recovered,tv_new_deaths,tv_new_cases,tv_total_deaths,tv_total_cases" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
