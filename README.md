@@ -8,11 +8,11 @@ In order to run this project , you will need to create an account and get a key 
 
 Screenshots
 -----------
-![OnboardingActivity](screenshots/Screenshot_1.png "Onboarding ")
-![WorldStatsFragment](screenshots/Screenshot_2.png "World Data")
-![ListCountriesStatsFragment](screenshots/Screenshot_3.png "List countries with stats")
-![DetailsCountriesStatsActivity](screenshots/Screenshot_4.png "Details country stats")
-![SearchHistoryFragment](screenshots/Screenshot_5.png "Search history country stats")
+![OnboardingActivity](screenshots/Screenshot_1.jpg "Onboarding ")
+![WorldStatsFragment](screenshots/Screenshot_2.jpg "World Data")
+![ListCountriesStatsFragment](screenshots/Screenshot_3.jpg "List countries with stats")
+![DetailsCountriesStatsActivity](screenshots/Screenshot_4.jpg "Details country stats")
+![SearchHistoryFragment](screenshots/Screenshot_5.jpg "Search history country stats")
 
 
 ## Libraries Used
