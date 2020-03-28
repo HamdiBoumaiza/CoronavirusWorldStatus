@@ -29,7 +29,7 @@
             android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="@string/search_history_stats"
-            android:textColor="@color/color_3a3a3a"
+            android:textColor="@color/color_111111"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical10"
