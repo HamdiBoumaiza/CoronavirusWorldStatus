@@ -11,13 +11,15 @@ import com.hb.covid19status.data.ResponseHistoryCountry
 import com.hb.covid19status.databinding.ActivityDetailsStatsBinding
 import com.hb.covid19status.model.CountryStat
 import com.hb.covid19status.model.HistoryStats
-import com.hb.covid19status.utils.*
+import com.hb.covid19status.utils.COUNTRY_STATS_EXTRA
+import com.hb.covid19status.utils.HISTORY_EXTRA
+import com.hb.covid19status.utils.viewModelProvider
 import javax.inject.Inject
 
 class DetailsCountriesStatsActivity : AppCompatActivity() {
 
-    private var countryStat: CountryStat? = null
-    private var responseHistoryCountryDate: ResponseHistoryCountry? = null
+    private lateinit var countryStat: CountryStat
+    private lateinit var responseHistoryCountry: ResponseHistoryCountry
     private val appComponents by lazy { MainApplication.appComponents }
 
     @Inject
@@ -39,63 +41,59 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
 
     private fun initViews() {
         intent?.let {
-            responseHistoryCountryDate =
-                it.getSerializableExtra(HISTORY_EXTRA) as ResponseHistoryCountry?
-            countryStat = it.getSerializableExtra(COUNTRY_STATS_EXTRA) as CountryStat?
-            if (responseHistoryCountryDate != null) {
-                showHistoryWithDate()
-            } else if (countryStat != null) {
-                showCountryStats()
+            it.getSerializableExtra(HISTORY_EXTRA)?.let { response ->
+                responseHistoryCountry = response as ResponseHistoryCountry
+                showHistoryWithDate(responseHistoryCountry)
+            }
+            it.getSerializableExtra(COUNTRY_STATS_EXTRA)?.let { country ->
+                countryStat = country as CountryStat
+                showCountryStats(countryStat)
             }
             setClickListener()
         }
     }
 
-    private fun showHistoryWithDate() {
-        if (responseHistoryCountryDate?.stat_by_country!!.isNotEmpty()) {
-            val historyStats: HistoryStats? = responseHistoryCountryDate?.stat_by_country?.last()
-            with(binding) {
-                historyStats?.apply {
-                    tvCountryName.text =
-                        "${responseHistoryCountryDate?.country} - ${historyStats.record_date.substring(
-                            0, 10
-                        )}"
-                    tvTotalCases.text = String.format(getString(R.string.total_cases), total_cases)
-                    tvTotalDeaths.text =
-                        String.format(getString(R.string.total_deaths), total_deaths)
-                    tvNewCases.text = String.format(getString(R.string.new_cases), new_cases)
-                    tvSeriousCases.text =
-                        String.format(getString(R.string.serious_cases), serious_critical)
-                    tvNewDeaths.text = String.format(getString(R.string.new_deaths), new_deaths)
-                    tvActiveCases.text =
-                        String.format(getString(R.string.active_cases), active_cases)
-                    tvTotalRecovered.text =
-                        String.format(getString(R.string.total_recovered), total_recovered)
-                    tvCasesPer1m.text =
-                        String.format(getString(R.string.cases_per_1m), total_cases_per1m)
-                }
+    private fun showHistoryWithDate(responseHistoryCountry :ResponseHistoryCountry) {
+        val historyStats: HistoryStats? = responseHistoryCountry.stat_by_country.last()
+        with(binding) {
+            historyStats?.apply {
+                tvCountryName.text =
+                    "${responseHistoryCountry?.country} - ${historyStats.record_date.substring(
+                        0, 10
+                    )}"
+                tvTotalCases.text = String.format(getString(R.string.total_cases), total_cases)
+                tvTotalDeaths.text =
+                    String.format(getString(R.string.total_deaths), total_deaths)
+                tvNewCases.text = String.format(getString(R.string.new_cases), new_cases)
+                tvSeriousCases.text =
+                    String.format(getString(R.string.serious_cases), serious_critical)
+                tvNewDeaths.text = String.format(getString(R.string.new_deaths), new_deaths)
+                tvActiveCases.text =
+                    String.format(getString(R.string.active_cases), active_cases)
+                tvTotalRecovered.text =
+                    String.format(getString(R.string.total_recovered), total_recovered)
+                tvCasesPer1m.text =
+                    String.format(getString(R.string.cases_per_1m), total_cases_per1m)
             }
-        } else {
-            binding.groupDetailsVisibility.hide()
-            binding.tvNoData.show()
         }
+
     }
 
 
     private fun setClickListener() {
         binding.fabShare.setOnClickListener {
-            if (responseHistoryCountryDate != null && responseHistoryCountryDate?.stat_by_country!!.isNotEmpty()) {
+            if (::responseHistoryCountry.isInitialized) {
                 shareCountryHistoryStats()
-            } else if (countryStat != null) {
+            } else if (::countryStat.isInitialized) {
                 shareCountryStats()
             }
         }
     }
 
 
-    private fun showCountryStats() {
+    private fun showCountryStats(countryStat : CountryStat) {
         with(binding) {
-            countryStat?.apply {
+            countryStat.apply {
                 tvCountryName.text = country_name
                 tvTotalCases.text = String.format(getString(R.string.total_cases), cases)
                 tvTotalDeaths.text = String.format(getString(R.string.total_deaths), deaths)
@@ -113,11 +111,11 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
     }
 
     private fun shareCountryStats() {
-        if (countryStat != null) {
+        if (::countryStat.isInitialized) {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.type = "text/plain"
-            countryStat?.apply {
+            countryStat.apply {
                 shareIntent.putExtra(
                     Intent.EXTRA_TEXT,
                     String.format(
@@ -137,15 +135,15 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
             startActivity(
                 Intent.createChooser(
                     shareIntent,
-                    String.format(getString(R.string.share_stats), countryStat?.country_name)
+                    String.format(getString(R.string.share_stats), countryStat.country_name)
                 )
             )
         }
     }
 
     private fun shareCountryHistoryStats() {
-        val historyStats: HistoryStats? = responseHistoryCountryDate?.stat_by_country?.last()
-        if (responseHistoryCountryDate != null) {
+        val historyStats: HistoryStats? = responseHistoryCountry.stat_by_country.last()
+        if (::responseHistoryCountry.isInitialized) {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.type = "text/plain"
@@ -170,7 +168,7 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
             startActivity(
                 Intent.createChooser(
                     shareIntent,
-                    String.format(getString(R.string.share_stats), countryStat?.country_name)
+                    String.format(getString(R.string.share_stats), countryStat.country_name)
                 )
             )
         }

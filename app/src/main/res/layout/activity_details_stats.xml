@@ -131,20 +131,6 @@
             android:visibility="visible"
             app:constraint_referenced_ids="tv_cases_per_1m,tv_total_recovered,tv_new_deaths,tv_new_cases,tv_total_deaths,tv_total_cases,tv_serious_cases,tv_active_cases,tv_country_name" />
 
-        <TextView
-            android:id="@+id/tv_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/no_data_message"
-            android:textColor="@color/color_3a3a3a"
-            android:textSize="24sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_share"
             android:layout_width="wrap_content"

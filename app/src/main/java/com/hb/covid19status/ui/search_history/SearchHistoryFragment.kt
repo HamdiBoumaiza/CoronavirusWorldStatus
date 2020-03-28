@@ -17,9 +17,7 @@ import com.hb.covid19status.R
 import com.hb.covid19status.data.ResponseHistoryCountry
 import com.hb.covid19status.databinding.FragmentHistoryStatsBinding
 import com.hb.covid19status.ui.details_stats.DetailsCountriesStatsActivity
-import com.hb.covid19status.utils.HISTORY_EXTRA
-import com.hb.covid19status.utils.toast
-import com.hb.covid19status.utils.viewModelProvider
+import com.hb.covid19status.utils.*
 import kotlinx.android.synthetic.main.fragment_history_stats.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -102,15 +100,32 @@ class SearchHistoryFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initObservers() {
-        getViewModel().resultHistory.observe(this, Observer {
-            sendData(it)
+        getViewModel().resultHistory.observe(this, Observer { response ->
+            response?.let { sendData(it) }
+        })
+
+        getViewModel().errorMessage.observe(this, Observer {
+            handleError()
+        })
+
+        getViewModel().showLoading.observe(this, Observer { showLoading ->
+            if (showLoading) binding.progress.show()
+            else binding.progress.hide()
         })
     }
 
+    private fun handleError() {
+        activity?.toast(getString(R.string.error_message))
+    }
+
     private fun sendData(responseHistoryCountryDate: ResponseHistoryCountry) {
-        Intent(activity, DetailsCountriesStatsActivity::class.java).apply {
-            putExtra(HISTORY_EXTRA, responseHistoryCountryDate)
-            startActivity(this)
+        if (responseHistoryCountryDate.stat_by_country.isNotEmpty()) {
+            Intent(activity, DetailsCountriesStatsActivity::class.java).apply {
+                putExtra(HISTORY_EXTRA, responseHistoryCountryDate)
+                startActivity(this)
+            }
+        } else {
+            activity?.toast(getString(R.string.no_data_message))
         }
     }
 
