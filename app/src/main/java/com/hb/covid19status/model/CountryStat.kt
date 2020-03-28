@@ -25,11 +25,11 @@ data class CountryStat(
     val new_cases: String,
 
     @SerializedName("serious_critical")
-    var serious_critical: String,
+    val serious_critical: String,
 
     @SerializedName("active_cases")
-    var active_cases: String,
+    val active_cases: String,
 
     @SerializedName("total_cases_per_1m_population")
-    var total_cases_per_1m_population: String
+    val total_cases_per_1m_population: String
 ) : Serializable

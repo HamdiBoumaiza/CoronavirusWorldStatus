@@ -18,4 +18,14 @@
         <item name="android:background">@drawable/background_red</item>
     </style>
 
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/color_3a3a3a</item>
+    </style>
+
+    <style name="EditText.Flat.Grey" parent="@style/AppTheme">
+        <item name="android:textColorHint">@color/color_999999</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textColor">@color/color_263238</item>
+    </style>
+
 </resources>

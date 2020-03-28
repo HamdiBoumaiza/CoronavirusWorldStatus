@@ -43,6 +43,7 @@ dependencies {
     def espresso_version = "3.2.0"
     def test_runner_version = "1.2.0"
     def swipe_refresh_version = "1.0.0"
+    def material_version = "1.0.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -92,5 +93,7 @@ dependencies {
     //Stetho interceptor
     implementation "com.facebook.stetho:stetho:$stetho_version"
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+
+    implementation "com.google.android.material:material:$material_version"
 
 }

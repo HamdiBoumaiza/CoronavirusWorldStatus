@@ -12,12 +12,34 @@
             android:id="@+id/constraint_parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.list_stats.ListCountriesStatsActivity">
+            tools:context=".ui.list_stats.ListCountriesStatsFragment">
+
+            <EditText
+                android:id="@+id/edittext_search"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_round_bg"
+                android:drawableEnd="@drawable/ic_search_black_24dp"
+                android:hint="@string/action_search"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_list_stats"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_search" />
 
             <TextView
                 android:id="@+id/tv_error_message"

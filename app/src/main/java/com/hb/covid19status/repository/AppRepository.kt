@@ -1,6 +1,6 @@
 package com.hb.covid19status.repository
 
-import com.hb.covid19status.data.ResponseListCountries
+import com.hb.covid19status.data.ResponseHistoryCountry
 import com.hb.covid19status.data.ResultData
 import com.hb.covid19status.model.CountryStat
 import com.hb.covid19status.model.WorldStats
@@ -14,5 +14,7 @@ interface AppRepository {
     suspend fun listCountriesWithStatsApi(): ResultData<List<CountryStat>>
     suspend fun listCountriesWithStatsDb(): ResultData<List<CountryStat>>
     suspend fun listCountriesWithStats(): ResultData<List<CountryStat>>
+
+    suspend fun historyByDateByCountryStats(country : String, date : String): ResultData<ResponseHistoryCountry>
 
 }

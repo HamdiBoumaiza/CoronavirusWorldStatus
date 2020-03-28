@@ -1,12 +1,16 @@
 package com.hb.covid19status.model
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
-@Entity(tableName = "WorldStats", primaryKeys = ["total_cases"])
-data class WorldStats(
+data class HistoryStats(
+
+    @SerializedName("id")
+    val id: String,
+
+    @SerializedName("country_name")
+    val country_name: String,
 
     @SerializedName("total_cases")
     val total_cases: String,
@@ -23,6 +27,16 @@ data class WorldStats(
     @SerializedName("new_deaths")
     val new_deaths: String,
 
-    @SerializedName("statistic_taken_at")
-    val statistic_taken_at: String
+    @SerializedName("active_cases")
+    val active_cases: String,
+
+    @SerializedName("serious_critical")
+    val serious_critical: String,
+
+    @SerializedName("total_cases_per1m")
+    val total_cases_per1m: String,
+
+    @SerializedName("record_date")
+    val record_date: String
+
 ) : Serializable

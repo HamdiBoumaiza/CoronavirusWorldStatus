@@ -20,7 +20,19 @@
     <string name="share">share</string>
     <string name="share_stats">Share Stats of %s</string>
     <string name="share_stats_message">Country: %s\nTotal cases: %s\nTotal Deaths: %s\nNew Cases: %s\nSerious Cases: %s\nNew Deaths: %s\nActive Cases: %s\nTotal Recovered: %s\nCases per one million : %s</string>
+    <string name="share_history_message">Country: %s\nTotal cases: %s\nTotal Deaths: %s\nNew Cases: %s\nSerious Cases: %s\nNew Deaths: %s\nActive Cases: %s\nTotal Recovered: %s\nCases per one million : %s\nRecord Date : %s</string>
     <string name="share_stats_world_message">Total cases: %s\nTotal Deaths: %s\nNew Cases: %s\nNew Deaths: %s\nTotal Recovered: %s\nLast updated : %s</string>
+    <string name="world_stats">World</string>
+    <string name="by_country">By Country</string>
+    <string name="history">History</string>
 
+    <string name="choose_a_date">choose a date</string>
+
+
+    <string name="format_date">yyyy-MM-dd</string>
+    <string name="message_required_fields">Please add country and date before starting the search</string>
+    <string name="no_data_message">Sorry , there is no available data for this date and country</string>
+    <string name="search_history_stats">Search stats by country and date</string>
+    <string name="calendar">Calendar</string>
 
 </resources>

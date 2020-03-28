@@ -24,9 +24,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.hb.covid19status.ui.list_stats.ListCountriesStatsActivity" />
-        <activity android:name="com.hb.covid19status.ui.details_stats.DetailsCountriesStatsActivity" />
-        <activity android:name="com.hb.covid19status.ui.world_stats.WorldStatsActivity" />
+        <activity
+            android:name="com.hb.covid19status.ui.details_stats.DetailsCountriesStatsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.hb.covid19status.ui.main.MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 

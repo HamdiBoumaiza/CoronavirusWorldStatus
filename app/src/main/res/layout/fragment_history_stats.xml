@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <TextView
+            android:id="@+id/tv_message_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="@string/search_history_stats"
+            android:textColor="@color/color_3a3a3a"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_search"
+            style="@style/EditText.Flat.Grey"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_round_bg"
+            android:drawableEnd="@drawable/ic_search_black_24dp"
+            android:hint="@string/action_search"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message_history" />
+
+        <EditText
+            android:id="@+id/edittext_calendar"
+            style="@style/EditText.Flat.Grey"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_round_bg"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_event_available_black_24dp"
+            android:focusable="false"
+            android:hint="@string/calendar"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_search" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/background_gris"
+            android:paddingStart="50dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="50dp"
+            android:paddingBottom="10dp"
+            android:text="@string/action_search"
+            android:textAllCaps="true"
+            android:textColor="@color/color_ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_calendar" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

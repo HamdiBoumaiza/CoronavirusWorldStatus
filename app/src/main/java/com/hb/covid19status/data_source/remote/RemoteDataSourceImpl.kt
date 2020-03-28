@@ -10,6 +10,7 @@ package com.hb.covid19status.data_source.remote
 
 import com.hb.covid19status.BuildConfig
 import com.hb.covid19status.api.ApiService
+import com.hb.covid19status.data.ResponseHistoryCountry
 import com.hb.covid19status.data.ResponseListCountries
 import com.hb.covid19status.data.ResultData
 import com.hb.covid19status.di.IoDispatcher
@@ -34,6 +35,16 @@ class RemoteDataSourceImpl(
         withContext(ioDispatcher) {
             val request =
                 api.getListCountriesStatsAsync(BuildConfig.API_KEY)
+            ResultData.Success(request)
+        }
+
+    override suspend fun historyByDateByCountryStats(
+        country: String,
+        date: String
+    ): ResultData<ResponseHistoryCountry> =
+        withContext(ioDispatcher) {
+            val request =
+                api.getHistoryByCountryAndDate(BuildConfig.API_KEY, country, date)
             ResultData.Success(request)
         }
 

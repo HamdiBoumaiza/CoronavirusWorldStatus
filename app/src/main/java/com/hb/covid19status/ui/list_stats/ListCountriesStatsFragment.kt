@@ -1,30 +1,29 @@
 package com.hb.covid19status.ui.list_stats
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.widget.SearchView
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hb.covid19status.MainApplication
 import com.hb.covid19status.R
-import com.hb.covid19status.databinding.ActivityListStatsBinding
+import com.hb.covid19status.databinding.FragmentListStatsBinding
 import com.hb.covid19status.model.CountryStat
 import com.hb.covid19status.ui.details_stats.DetailsCountriesStatsActivity
 import com.hb.covid19status.utils.*
 import javax.inject.Inject
 
-class ListCountriesStatsActivity : AppCompatActivity(),
+class ListCountriesStatsFragment : Fragment(),
     CountriesItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var countriesAdapter : CountriesStatsAdapter
+    private lateinit var countriesAdapter: CountriesStatsAdapter
     private val appComponents by lazy { MainApplication.appComponents }
 
     @Inject
@@ -34,13 +33,20 @@ class ListCountriesStatsActivity : AppCompatActivity(),
         return viewModelProvider(viewModelFactory)
     }
 
-    private lateinit var binding: ActivityListStatsBinding
+    private lateinit var binding: FragmentListStatsBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        @Nullable container: ViewGroup?,
+        @Nullable savedInstanceState: Bundle?
+    ): View? {
         appComponents.inject(this)
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_list_stats)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_stats, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
     }
@@ -48,6 +54,10 @@ class ListCountriesStatsActivity : AppCompatActivity(),
     private fun initViews() {
         getViewModel().getListOfStats()
         binding.swipeRefresh.setOnRefreshListener(this)
+        binding.edittextSearch.onChange {
+            if (::countriesAdapter.isInitialized)
+                countriesAdapter.filter.filter(it)
+        }
     }
 
     private fun initObservers() {
@@ -70,7 +80,7 @@ class ListCountriesStatsActivity : AppCompatActivity(),
             countriesAdapter = CountriesStatsAdapter(list, this)
             binding.recyclerListStats.apply {
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(this@ListCountriesStatsActivity)
+                layoutManager = LinearLayoutManager(activity)
                 adapter = countriesAdapter
             }
         } else {
@@ -88,43 +98,10 @@ class ListCountriesStatsActivity : AppCompatActivity(),
 
 
     override fun onCountryItemClicked(countryStat: CountryStat) {
-        Intent(this, DetailsCountriesStatsActivity::class.java).apply {
+        Intent(activity, DetailsCountriesStatsActivity::class.java).apply {
             putExtra(COUNTRY_STATS_EXTRA, countryStat)
             startActivity(this)
         }
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        // Associate searchable configuration with the SearchView
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        searchView.maxWidth = Integer.MAX_VALUE
-
-        // listening to search query text change
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                // filter recycler view when query submitted
-                countriesAdapter.filter.filter(query)
-                return false
-            }
-
-            override fun onQueryTextChange(query: String): Boolean {
-                // filter recycler view when text is changed
-                countriesAdapter.filter.filter(query)
-                return false
-            }
-        })
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        return if (id == R.id.action_search) {
-            true
-        } else super.onOptionsItemSelected(item)
     }
 
     override fun onRefresh() {

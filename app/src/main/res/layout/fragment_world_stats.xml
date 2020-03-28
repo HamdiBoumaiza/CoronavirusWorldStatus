@@ -87,22 +87,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_new_deaths"
             tools:text="@string/total_recovered" />
 
-
-        <TextView
-            android:id="@+id/tv_more_details"
-            style="@style/TextStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/background_red_green_gradient"
-            android:text="@string/more_details"
-            android:textColor="@color/color_ffffff"
-            app:layout_constraintBottom_toTopOf="@+id/tv_last_updated"
-            app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
-            app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
-            app:layout_constraintTop_toBottomOf="@+id/tv_total_recovered" />
-
-
         <TextView
             android:id="@+id/tv_last_updated"
             android:layout_width="0dp"
@@ -133,8 +117,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="tv_last_updated,tv_more_details,tv_total_recovered,tv_new_deaths,tv_new_cases,tv_total_deaths,tv_total_cases" />
+            app:constraint_referenced_ids="fab_share,tv_last_updated,tv_total_recovered,tv_new_deaths,tv_new_cases,tv_total_deaths,tv_total_cases" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/color_3a3a3a"
+            android:src="@drawable/ic_share_white_24dp"
+            android:tint="@color/color_ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

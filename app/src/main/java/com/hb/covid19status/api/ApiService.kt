@@ -1,10 +1,11 @@
 package com.hb.covid19status.api
 
+import com.hb.covid19status.data.ResponseHistoryCountry
 import com.hb.covid19status.data.ResponseListCountries
 import com.hb.covid19status.model.WorldStats
-import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -17,5 +18,12 @@ interface ApiService {
     suspend fun getListCountriesStatsAsync(
         @Header("x-rapidapi-key") amount: String
     ): ResponseListCountries
+
+    @GET(HISTORY_BY_COUNTRIES_BY_DATE_URL)
+    suspend fun getHistoryByCountryAndDate(
+        @Header("x-rapidapi-key") amount: String,
+        @Query("country") country: String,
+        @Query("date") date: String
+    ): ResponseHistoryCountry
 
 }

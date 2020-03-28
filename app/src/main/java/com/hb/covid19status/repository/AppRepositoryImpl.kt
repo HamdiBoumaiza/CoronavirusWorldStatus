@@ -1,6 +1,7 @@
 package com.hb.covid19status.repository
 
 import com.hb.covid19status.data.RemoteDataNotFoundException
+import com.hb.covid19status.data.ResponseHistoryCountry
 import com.hb.covid19status.data.ResultData
 import com.hb.covid19status.data_source.local.AppDao
 import com.hb.covid19status.data_source.remote.RemoteDataSource
@@ -46,8 +47,6 @@ class AppRepositoryImpl(
     }
 
 
-
-
     override suspend fun worldWithStatsApi(): ResultData<WorldStats> {
         return when (val result = remoteDataSource.worldWithStats()) {
             is ResultData.Success -> {
@@ -74,5 +73,19 @@ class AppRepositoryImpl(
         }
     }
 
+
+    override suspend fun historyByDateByCountryStats(
+        country: String,
+        date: String
+    ): ResultData<ResponseHistoryCountry> {
+        return when (val result = remoteDataSource.historyByDateByCountryStats(country, date)) {
+            is ResultData.Success -> {
+                ResultData.Success(result.data)
+            }
+            is ResultData.Error -> {
+                ResultData.Error(RemoteDataNotFoundException())
+            }
+        }
+    }
 
 }

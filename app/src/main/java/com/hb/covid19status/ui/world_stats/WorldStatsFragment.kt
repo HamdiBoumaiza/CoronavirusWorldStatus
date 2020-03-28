@@ -2,17 +2,16 @@ package com.hb.covid19status.ui.world_stats
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.*
+import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.hb.covid19status.MainApplication
 import com.hb.covid19status.R
-import com.hb.covid19status.databinding.ActivityWorldStatsBinding
+import com.hb.covid19status.databinding.FragmentWorldStatsBinding
 import com.hb.covid19status.model.WorldStats
-import com.hb.covid19status.ui.list_stats.ListCountriesStatsActivity
 import com.hb.covid19status.utils.hide
 import com.hb.covid19status.utils.show
 import com.hb.covid19status.utils.toast
@@ -20,7 +19,7 @@ import com.hb.covid19status.utils.viewModelProvider
 import javax.inject.Inject
 
 
-class WorldStatsActivity : AppCompatActivity() {
+class WorldStatsFragment : Fragment() {
 
     private lateinit var stats: WorldStats
     private val appComponents by lazy { MainApplication.appComponents }
@@ -32,31 +31,35 @@ class WorldStatsActivity : AppCompatActivity() {
         return viewModelProvider(viewModelFactory)
     }
 
-    private lateinit var binding: ActivityWorldStatsBinding
+    private lateinit var binding: FragmentWorldStatsBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        @Nullable container: ViewGroup?,
+        @Nullable savedInstanceState: Bundle?
+    ): View? {
         appComponents.inject(this)
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_world_stats)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_world_stats, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
     }
 
     private fun initViews() {
         getViewModel().getWorldStats()
-        binding.tvMoreDetails.setOnClickListener {
-            startActivity(Intent(this, ListCountriesStatsActivity::class.java))
-        }
+
     }
 
 
     private fun initObservers() {
         getViewModel().resultWorldStats.observe(this, Observer { worldStats ->
             worldStats?.let {
-                binding.groupVisibility.show()
-                binding.world = it
-                stats = it
+                showData(it)
+                binding.fabShare.setOnClickListener { shareWorldStats() }
             } ?: kotlin.run {
                 handleError()
             }
@@ -71,25 +74,17 @@ class WorldStatsActivity : AppCompatActivity() {
         })
     }
 
+    private fun showData(it: WorldStats) {
+        binding.groupVisibility.show()
+        binding.world = it
+        stats = it
+    }
+
     private fun handleError() {
-        toast(getString(R.string.error_message))
+        activity?.toast(getString(R.string.error_message))
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_share, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        return if (id == R.id.action_share) {
-            shareCountryStats()
-            true
-        } else super.onOptionsItemSelected(item)
-    }
-
-    private fun shareCountryStats() {
+    private fun shareWorldStats() {
         if (::stats.isInitialized) {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
@@ -111,7 +106,7 @@ class WorldStatsActivity : AppCompatActivity() {
             startActivity(
                 Intent.createChooser(
                     shareIntent,
-                    String.format(getString(R.string.share_stats), "the world")
+                    String.format(getString(R.string.share_stats), "the ic_world")
                 )
             )
         }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.hb.covid19status.ui.details_stats.DetailsCountryStatsViewModel
 import com.hb.covid19status.ui.list_stats.ListCountriesStatsViewModel
 import com.hb.covid19status.ui.onboarding.OnboardingViewModel
+import com.hb.covid19status.ui.search_history.SearchHistoryViewModel
 import com.hb.covid19status.ui.world_stats.WorldStatsViewModel
 import dagger.Binds
 import dagger.Module
@@ -37,6 +38,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OnboardingViewModel::class)
     abstract fun bindOnboardingVM(onboardingViewModel: OnboardingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchHistoryViewModel::class)
+    abstract fun bindSearchHistoryVM(searchHistoryViewModel: SearchHistoryViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory

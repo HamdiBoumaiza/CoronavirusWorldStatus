@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_world"
+        android:icon="@drawable/ic_world"
+        android:orderInCategory="100"
+        android:title="@string/world_stats"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_country"
+        android:icon="@drawable/ic_nation"
+        android:orderInCategory="100"
+        android:title="@string/by_country"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history"
+        android:orderInCategory="100"
+        android:title="@string/history"
+        app:showAsAction="ifRoom" />
+</menu>

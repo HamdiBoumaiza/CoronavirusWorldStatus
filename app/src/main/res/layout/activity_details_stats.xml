@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="country"
-            type="com.hb.covid19status.model.CountryStat" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_parent"
@@ -36,8 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="@drawable/background_red_green_gradient"
-            android:text="@{country.country_name}"
+            android:background="@drawable/background_gris"
             android:textColor="@color/color_ffffff"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
@@ -50,7 +43,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@{String.format(@string/total_cases, country.cases)}"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             app:layout_constraintTop_toBottomOf="@+id/tv_country_name"
@@ -61,7 +53,6 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/total_deaths, country.deaths)}"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_cases"
@@ -72,7 +63,6 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/new_cases, country.new_cases)}"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_deaths"
@@ -83,7 +73,6 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/serious_cases, country.serious_critical)}"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             app:layout_constraintTop_toBottomOf="@+id/tv_new_cases"
@@ -94,7 +83,6 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/new_deaths, country.new_deaths)}"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             app:layout_constraintTop_toBottomOf="@+id/tv_serious_cases"
@@ -105,7 +93,6 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/active_cases, country.active_cases)}"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical90"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             app:layout_constraintTop_toBottomOf="@+id/tv_new_deaths"
@@ -115,7 +102,6 @@
             android:id="@+id/tv_total_recovered"
             style="@style/TextStyle"
             android:layout_width="0dp"
-            android:text="@{String.format(@string/total_recovered, country.total_recovered)}"
             android:layout_height="wrap_content"
             android:background="@drawable/background_green"
             android:textColor="@color/color_61D292"
@@ -130,7 +116,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{String.format(@string/cases_per_1m, country.total_cases_per_1m_population)}"
             android:textColor="@color/color_F0637B"
             android:textSize="18sp"
             android:textStyle="italic"
@@ -139,14 +124,37 @@
             app:layout_constraintStart_toStartOf="@id/guideline_vertical10"
             tools:text="@string/cases_per_1m" />
 
-        <ProgressBar
-            android:id="@+id/progress"
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_details_visibility"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="tv_cases_per_1m,tv_total_recovered,tv_new_deaths,tv_new_cases,tv_total_deaths,tv_total_cases,tv_serious_cases,tv_active_cases,tv_country_name" />
+
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/no_data_message"
+            android:textColor="@color/color_3a3a3a"
+            android:textSize="24sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/color_3a3a3a"
+            android:src="@drawable/ic_share_white_24dp"
+            android:tint="@color/color_ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
