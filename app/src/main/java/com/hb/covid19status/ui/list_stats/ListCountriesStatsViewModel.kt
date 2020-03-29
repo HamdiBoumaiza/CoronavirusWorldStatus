@@ -33,7 +33,7 @@ class ListCountriesStatsViewModel @Inject constructor(
                     }
                     is ResultData.Error -> {
                         _showLoading.postValue(false)
-                        _errorMessage.postValue("")
+                        _errorMessage.postValue(response.exception.toString())
                     }
                 }
             } catch (e: Exception) {
