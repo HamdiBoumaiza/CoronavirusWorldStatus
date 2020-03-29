@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ListCountriesStatsViewModel @Inject constructor(
-    private val repositoryImpl: AppRepositoryImpl) : ViewModel() {
+    private val repositoryImpl: AppRepositoryImpl
+) : ViewModel() {
 
     private var _resultListStats = MutableLiveData<List<CountryStat>>()
     var resultListStats: LiveData<List<CountryStat>> = _resultListStats

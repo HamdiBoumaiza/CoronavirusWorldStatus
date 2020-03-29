@@ -39,7 +39,7 @@ class CountriesStatsAdapter(
         RecyclerView.ViewHolder(viewDataBinding.root) {
 
         fun bindViewHolder(countryStats: CountryStat) {
-             viewDataBinding.item = countryStats
+            viewDataBinding.item = countryStats
             viewDataBinding.itemClickListener = countriesItemClickListener
         }
     }
@@ -52,7 +52,7 @@ class CountriesStatsAdapter(
                 if (charString.isEmpty()) {
                     listStats = tempListCountries
                 } else {
-                val filteredList = ArrayList<CountryStat>()
+                    val filteredList = ArrayList<CountryStat>()
                     for (row in tempListCountries) {
                         if (row.country_name.toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row)
@@ -64,6 +64,7 @@ class CountriesStatsAdapter(
                 filterResults.values = listStats
                 return filterResults
             }
+
             override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
                 listStats = filterResults.values as List<CountryStat>
                 notifyDataSetChanged()

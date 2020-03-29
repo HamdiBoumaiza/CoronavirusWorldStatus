@@ -9,7 +9,7 @@ import com.hb.covid19status.model.CountryStat
 import com.hb.covid19status.model.RoomDataConverter
 import com.hb.covid19status.model.WorldStats
 
-@Database(entities = [CountryStat::class,WorldStats::class], version = 1)
+@Database(entities = [CountryStat::class, WorldStats::class], version = 1)
 @TypeConverters(RoomDataConverter::class)
 abstract class AppDb : RoomDatabase() {
 

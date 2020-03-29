@@ -10,7 +10,11 @@ interface RemoteDataSource {
 
     suspend fun worldWithStats(): ResultData<WorldStats>
     suspend fun listCountriesWithStats(): ResultData<ResponseListCountriesStats>
-    suspend fun historyByDateByCountryStats(country : String, date : String): ResultData<ResponseHistoryCountry>
+    suspend fun historyByDateByCountryStats(
+        country: String,
+        date: String
+    ): ResultData<ResponseHistoryCountry>
+
     suspend fun affectedCountries(): ResultData<ResponseListCountriesAffected>
 
 }

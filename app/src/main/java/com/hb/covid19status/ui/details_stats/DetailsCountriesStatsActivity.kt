@@ -58,7 +58,7 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
         with(binding) {
             historyStats?.apply {
                 tvCountryName.text =
-                    "${responseHistoryCountry?.country} - ${historyStats.record_date.substring(
+                    "${responseHistoryCountry.country} - ${historyStats.record_date.substring(
                         0, 10
                     )}"
                 tvTotalCases.text = String.format(getString(R.string.total_cases), total_cases)

@@ -10,7 +10,6 @@ import com.hb.covid19status.MainApplication
 import com.hb.covid19status.R
 import com.hb.covid19status.databinding.ActivityOnboardingBinding
 import com.hb.covid19status.ui.main.MainActivity
-import com.hb.covid19status.ui.world_stats.WorldStatsFragment
 import com.hb.covid19status.utils.viewModelProvider
 import javax.inject.Inject
 

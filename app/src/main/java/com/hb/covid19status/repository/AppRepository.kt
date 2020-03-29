@@ -16,7 +16,10 @@ interface AppRepository {
     suspend fun listCountriesWithStatsDb(): ResultData<List<CountryStat>>
     suspend fun listCountriesWithStats(): ResultData<List<CountryStat>>
 
-    suspend fun historyByDateByCountryStats(country : String, date : String): ResultData<ResponseHistoryCountry>
+    suspend fun historyByDateByCountryStats(
+        country: String,
+        date: String
+    ): ResultData<ResponseHistoryCountry>
 
     suspend fun affectedCountries(): ResultData<ResponseListCountriesAffected>
 

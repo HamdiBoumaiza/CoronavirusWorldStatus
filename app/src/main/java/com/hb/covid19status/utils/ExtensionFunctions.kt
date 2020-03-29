@@ -55,6 +55,7 @@ fun EditText.onChange(cb: (String) -> Unit) {
         override fun afterTextChanged(s: Editable?) {
             cb(s.toString())
         }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
