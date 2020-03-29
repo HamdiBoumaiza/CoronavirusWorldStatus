@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.hb.covid19status.model.CountryStat
 
 
-data class ResponseListCountries(
+data class ResponseListCountriesStats(
 
     @SerializedName("countries_stat")
     val countries_stat: List<CountryStat>

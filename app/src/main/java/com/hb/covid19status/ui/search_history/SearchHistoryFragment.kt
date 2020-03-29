@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_history_stats.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+
 
 class SearchHistoryFragment : Fragment(), View.OnClickListener {
 
@@ -50,6 +52,7 @@ class SearchHistoryFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getViewModel().getListAffectedCountries()
         initObservers()
         initCalendar()
         binding.edittextCalendar.setOnClickListener(this)
@@ -100,6 +103,12 @@ class SearchHistoryFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initObservers() {
+        getViewModel().resulAffectedCountries.observe(this, Observer { response ->
+            response?.let {
+                setAutoCompleteData(it)
+            }
+        })
+
         getViewModel().resultHistory.observe(this, Observer { response ->
             response?.let { sendData(it) }
         })
@@ -112,6 +121,17 @@ class SearchHistoryFragment : Fragment(), View.OnClickListener {
             if (showLoading) binding.progress.show()
             else binding.progress.hide()
         })
+    }
+
+    // Create the adapter and set it to the AutoCompleteTextView
+    private fun setAutoCompleteData(listCountries: List<String>) {
+        ArrayAdapter<String>(
+            activity!!,
+            android.R.layout.simple_list_item_1,
+            listCountries
+        ).also { adapter ->
+            binding.edittextSearch.setAdapter(adapter)
+        }
     }
 
     private fun handleError() {

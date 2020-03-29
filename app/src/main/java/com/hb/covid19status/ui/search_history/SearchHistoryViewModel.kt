@@ -17,6 +17,9 @@ class SearchHistoryViewModel @Inject constructor(
     private var _resultHistory = MutableLiveData<ResponseHistoryCountry>()
     var resultHistory: LiveData<ResponseHistoryCountry> = _resultHistory
 
+    private var _resulAffectedCountries = MutableLiveData<List<String>>()
+    var resulAffectedCountries: LiveData<List<String>> = _resulAffectedCountries
+
     private var _errorMessage = MutableLiveData<String>()
     var errorMessage: LiveData<String> = _errorMessage
 
@@ -31,6 +34,27 @@ class SearchHistoryViewModel @Inject constructor(
                     is ResultData.Success -> {
                         _showLoading.postValue(false)
                         _resultHistory.postValue(response.data)
+                    }
+                    is ResultData.Error -> {
+                        _showLoading.postValue(false)
+                        _errorMessage.postValue("")
+                    }
+                }
+            } catch (e: Exception) {
+                _showLoading.postValue(false)
+                _errorMessage.postValue(e.message)
+            }
+        }
+    }
+
+    fun getListAffectedCountries() {
+        _showLoading.postValue(true)
+        viewModelScope.launch {
+            try {
+                when (val response = repositoryImpl.affectedCountries()) {
+                    is ResultData.Success -> {
+                        _showLoading.postValue(false)
+                        _resulAffectedCountries.postValue(response.data.affected_countries)
                     }
                     is ResultData.Error -> {
                         _showLoading.postValue(false)

@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical10"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/edittext_search"
             style="@style/EditText.Flat.Grey"
             android:layout_width="0dp"
