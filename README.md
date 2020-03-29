@@ -14,8 +14,15 @@ Screenshots
 ![DetailsCountriesStatsActivity](screenshots/Screenshot_4.jpg "Details country stats")
 ![SearchHistoryFragment](screenshots/Screenshot_5.jpg "Search history country stats")
 
+Application features
+---------------
+* All stats world wide
+* All stats by countries
+* Search by country
+* Search stats by date and country
 
-## Libraries Used
+Libraries Used
+---------------
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
 * [LiveData](https://developer.android.com/jetpack/arch/livedata) - notify the view when data changes .
 * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - perform action when lifecycle state changes
