@@ -1,8 +1,12 @@
 package com.hb.covid19status.ui.details_stats
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hb.covid19status.MainApplication
@@ -14,7 +18,10 @@ import com.hb.covid19status.model.HistoryStats
 import com.hb.covid19status.utils.COUNTRY_STATS_EXTRA
 import com.hb.covid19status.utils.HISTORY_EXTRA
 import com.hb.covid19status.utils.viewModelProvider
+import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Inject
+
 
 class DetailsCountriesStatsActivity : AppCompatActivity() {
 
@@ -53,7 +60,7 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
         }
     }
 
-    private fun showHistoryWithDate(responseHistoryCountry :ResponseHistoryCountry) {
+    private fun showHistoryWithDate(responseHistoryCountry: ResponseHistoryCountry) {
         val historyStats: HistoryStats? = responseHistoryCountry.stat_by_country.last()
         with(binding) {
             historyStats?.apply {
@@ -79,19 +86,13 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
 
     }
 
-
     private fun setClickListener() {
         binding.fabShare.setOnClickListener {
-            if (::responseHistoryCountry.isInitialized) {
-                shareCountryHistoryStats()
-            } else if (::countryStat.isInitialized) {
-                shareCountryStats()
-            }
+            shareImageUri()
         }
     }
 
-
-    private fun showCountryStats(countryStat : CountryStat) {
+    private fun showCountryStats(countryStat: CountryStat) {
         with(binding) {
             countryStat.apply {
                 tvCountryName.text = country_name
@@ -110,68 +111,30 @@ class DetailsCountriesStatsActivity : AppCompatActivity() {
         }
     }
 
-    private fun shareCountryStats() {
-        if (::countryStat.isInitialized) {
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-            shareIntent.type = "text/plain"
-            countryStat.apply {
-                shareIntent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    String.format(
-                        getString(R.string.share_stats_message),
-                        country_name,
-                        cases,
-                        deaths,
-                        new_cases,
-                        serious_critical,
-                        new_deaths,
-                        active_cases,
-                        total_recovered,
-                        total_cases_per_1m_population
-                    )
-                )
-            }
-            startActivity(
-                Intent.createChooser(
-                    shareIntent,
-                    String.format(getString(R.string.share_stats), countryStat.country_name)
-                )
-            )
-        }
+    private fun saveImageToExternalStorage(bitmap: Bitmap): Uri? {
+        return FileProvider.getUriForFile(
+            this@DetailsCountriesStatsActivity,
+            "$packageName.fileprovider",
+            setFileFromBitmap(bitmap)
+        )
     }
 
-    private fun shareCountryHistoryStats() {
-        val historyStats: HistoryStats? = responseHistoryCountry.stat_by_country.last()
-        if (::responseHistoryCountry.isInitialized) {
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-            shareIntent.type = "text/plain"
-            historyStats?.apply {
-                shareIntent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    String.format(
-                        getString(R.string.share_history_message),
-                        country_name,
-                        total_cases,
-                        total_deaths,
-                        new_cases,
-                        serious_critical,
-                        new_deaths,
-                        active_cases,
-                        total_recovered,
-                        total_cases_per1m,
-                        record_date.substring(0, 10)
-                    )
-                )
-            }
-            startActivity(
-                Intent.createChooser(
-                    shareIntent,
-                    String.format(getString(R.string.share_stats), countryStat.country_name)
-                )
-            )
-        }
+    private fun setFileFromBitmap(image: Bitmap): File {
+        val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share.png")
+        val stream = FileOutputStream(file)
+        image.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        stream.close()
+        return file
     }
 
+    private fun shareImageUri() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(
+            Intent.EXTRA_STREAM,
+            saveImageToExternalStorage(getViewModel().takeScreenShot(binding.constraintParent)!!)
+        )
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.type = "image/png"
+        startActivity(intent)
+    }
 }

@@ -19,8 +19,6 @@
     <string name="stay_up_to_date">Stay Up to date with the latest stats of the corona virus (Covid19).</string>
     <string name="share">share</string>
     <string name="share_stats">Share Stats of %s</string>
-    <string name="share_stats_message">Country: %s\nTotal cases: %s\nTotal Deaths: %s\nNew Cases: %s\nSerious Cases: %s\nNew Deaths: %s\nActive Cases: %s\nTotal Recovered: %s\nCases per one million : %s</string>
-    <string name="share_history_message">Country: %s\nTotal cases: %s\nTotal Deaths: %s\nNew Cases: %s\nSerious Cases: %s\nNew Deaths: %s\nActive Cases: %s\nTotal Recovered: %s\nCases per one million : %s\nRecord Date : %s</string>
     <string name="share_stats_world_message">Total cases: %s\nTotal Deaths: %s\nNew Cases: %s\nNew Deaths: %s\nTotal Recovered: %s\nLast updated : %s</string>
     <string name="world_stats">World</string>
     <string name="by_country">By Country</string>
