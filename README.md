@@ -9,7 +9,7 @@ In order to run this project , you will need to create an account and get a key 
 
 Get the APK
 ---------------
-Third release [Link](https://github.com/HamdiBoumaiza/CoronavirusWorldStatus/releases/download/3.1/Covid19Status.apk)
+Third release (version 3.1) [Link](https://github.com/HamdiBoumaiza/CoronavirusWorldStatus/releases/download/3.1/Covid19Status.apk)
 
 Screenshots
 -----------
