@@ -5,6 +5,11 @@ This App is using [Coronavirus monitor API](https://rapidapi.com/astsiatsko/api/
 Getting Started
 ---------------
 In order to run this project , you will need to create an account and get a key from [the rapid api](https://rapidapi.com/) and add it to the gradle.properties file
+## Download The App from here 
+
+Get the APK
+---------------
+[third release](https://github.com/HamdiBoumaiza/CoronavirusWorldStatus/releases/download/3.1/Covid19Status.apk)
 
 Screenshots
 -----------
